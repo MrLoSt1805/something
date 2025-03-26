@@ -10,7 +10,7 @@ const UploadPage = () => {
   const handleFileChange = (event) => {
     const selectedFile = event.target.files[0];
     if (selectedFile && selectedFile.type === "application/pdf") {
-      setFile(URL.createObjectURL(selectedFile)); // Create a URL for the uploaded PDF
+      setFile(URL.createObjectURL(selectedFile));
     } else {
       alert("Please upload a valid PDF file.");
     }
@@ -31,8 +31,8 @@ const UploadPage = () => {
           />
         </div>
       ) : (
-        <div className="container">
-          {/* Left: PDF Preview */}
+        <>
+          {/* PDF viewer on the left */}
           <div className="pdf-preview">
             <iframe
               src={file}
@@ -40,16 +40,16 @@ const UploadPage = () => {
               height="100%"
               style={{ border: "none" }}
               title="PDF Preview"
-            ></iframe>
+            />
           </div>
 
-          {/* Right: Action Buttons */}
+          {/* Buttons on the right */}
           <div className="button-container">
             <button className="action-btn">Summarization</button>
             <button className="action-btn">Risk Analysis</button>
             <button className="action-btn">Cross Verification</button>
           </div>
-        </div>
+        </>
       )}
     </div>
   );

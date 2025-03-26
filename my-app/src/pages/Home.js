@@ -4,7 +4,7 @@ import "../styles.css"; // Import global CSS
 
 const Home = () => {
   return (
-    <div className="container">
+    <div className="bg">
       <h1>TechLegal</h1>
       <p>We do Summarization, Risk Analysis, Text Cross Verification</p>
       <Link to="/upload">
