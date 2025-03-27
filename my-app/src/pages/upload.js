@@ -1,10 +1,13 @@
+
 // import React, { useState, useRef } from "react";
 // import { CloudUploadOutlined } from "@ant-design/icons";
+// import backgroundImage from "../assets/pic_2.jpg";  // ✅ Correct Import
 // import "../styles.css";
 // import "./upload.css";
-// import { Link } from "react-router-dom";
+
 // const UploadPage = () => {
 //   const [file, setFile] = useState(null);
+//   const [pdfUrl, setPdfUrl] = useState(null);
 //   const fileInputRef = useRef(null);
 
 //   const handleFileChange = (event) => {
@@ -16,59 +19,102 @@
 //     }
 //   };
 
+//   const handleSummarization = async () => {
+//     try {
+//       const response = await fetch("http://localhost:5000/summarize", {
+//         method: "POST",
+//       });
+
+//       if (!response.ok) {
+//         throw new Error("Failed to generate PDF");
+//       }
+
+//       const blob = await response.blob();
+//       const pdfUrl = URL.createObjectURL(blob);
+//       setPdfUrl(pdfUrl);
+//     } catch (error) {
+//       console.error("Error:", error);
+//       alert("Failed to generate PDF.");
+//     }
+//   };
+
 //   return (
-//     <div className="bg">
-//       {!file ? (
-//         <div onClick={() => fileInputRef.current.click()} className="upload-box">
-//           <CloudUploadOutlined className="upload-icon" />
-//           <p>Click to upload a PDF</p>
-//           <input
-//             type="file"
-//             ref={fileInputRef}
-//             className="hidden-input"
-//             onChange={handleFileChange}
-//             accept="application/pdf"
-//           />
-//         </div>
-//       ) : (
-//         <>
-//           {/* PDF viewer on the left */}
-//           <div className="pdf-preview">
-//             <iframe
-//               src={file}
-//               width="100%"
-//               height="100%"
-//               style={{ border: "none" }}
-//               title="PDF Preview"
+//     <div
+//       className="bg"
+//       style={{
+//         backgroundImage: `url(${backgroundImage})`,
+//         backgroundSize: "cover",
+//         backgroundPosition: "center",
+//         backgroundRepeat: "no-repeat",
+//       }}
+//     >
+//       <div>
+//         {!file ? (
+//           <div onClick={() => fileInputRef.current.click()} className="upload-box">
+//             <CloudUploadOutlined className="upload-icon" />
+//             <p>Click to upload a PDF</p>
+//             <input
+//               type="file"
+//               ref={fileInputRef}
+//               className="hidden-input"
+//               onChange={handleFileChange}
+//               accept="application/pdf"
 //             />
 //           </div>
+//         ) : (
+//           <>
+//             <div className="container">
+//               <div className="pdf-preview">
+//                 <iframe
+//                   src={file}
+//                   width="100%"
+//                   height="600px"
+//                   style={{ border: "none" }}
+//                   title="PDF Preview"
+//                 ></iframe>
+//               </div>
 
-//           {/* Buttons on the right */}
-//           <div className="button-container">
-//           <Link to="/summary">
-//             <button className="action-btn">Summarization</button>
-//           </Link>
-//             <button className="action-btn">Risk Analysis</button>
-//             <button className="action-btn">Cross Verification</button>
-//           </div>
-//         </>
-//       )}
+//               <div className="button-container">
+//                 <button onClick={handleSummarization} className="action-btn">
+//                   Summarization
+//                 </button>
+
+//                 <button className="action-btn">Cross Verification</button>
+//               </div>
+//             </div>
+
+//             {pdfUrl && (
+//               <div className="pdf-container">
+//                 <h3>Generated PDF:</h3>
+//                 <iframe
+//                   src={pdfUrl}
+//                   width="100%"
+//                   height="600px"
+//                   style={{ border: "none" }}
+//                   title="Generated PDF"
+//                 ></iframe>
+//               </div>
+//             )}
+//           </>
+//         )}
+//       </div>
 //     </div>
 //   );
 // };
 
 // export default UploadPage;
 
-
 import React, { useState, useRef } from "react";
 import { CloudUploadOutlined } from "@ant-design/icons";
-import backgroundImage from "../assets/pic_2.jpg"; // ✅ Correct Import
+import { useNavigate } from "react-router-dom";  // For navigation
+import backgroundImage from "../assets/pic_2.jpg";  
 import "../styles.css";
 import "./upload.css";
 
 const UploadPage = () => {
   const [file, setFile] = useState(null);
   const fileInputRef = useRef(null);
+  const navigate = useNavigate();
 
   const handleFileChange = (event) => {
     const selectedFile = event.target.files[0];
@@ -79,11 +125,16 @@ const UploadPage = () => {
     }
   };
 
+  const handleSummarization = () => {
+    // Redirect to /summary before processing starts
+    navigate('/summary');
+  };
+
   return (
     <div
       className="bg"
       style={{
-        backgroundImage: `url(${backgroundImage})`, // ✅ Sets background
+        backgroundImage: `url(${backgroundImage})`,
         backgroundSize: "cover",
         backgroundPosition: "center",
         backgroundRepeat: "no-repeat",
@@ -115,8 +166,13 @@ const UploadPage = () => {
             </div>
 
             <div className="button-container">
-              <button className="action-btn">Summarization</button>
-              <button className="action-btn">Risk Analysis</button>
+              <button 
+                onClick={handleSummarization} 
+                className="action-btn"
+              >
+                Summarize
+              </button>
+              
               <button className="action-btn">Cross Verification</button>
             </div>
           </div>
@@ -127,3 +183,4 @@ const UploadPage = () => {
 };
 
 export default UploadPage;
+

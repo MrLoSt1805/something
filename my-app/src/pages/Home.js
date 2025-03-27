@@ -28,12 +28,12 @@ const Home = () => {
       {/* Left Section (Upload Button) */}
       <div className="left-section">
         <Link to="/upload">
-          <button className="upload-btn">Upload</button>
+          <button className="upload-btn">Get Started</button>
         </Link>
       </div>
 
       {/* Right Section (About Us) */}
-      <div className="right-section">
+
         <div className="about-box">
           <h2>About Us</h2>
           <p>
@@ -45,7 +45,7 @@ const Home = () => {
           </p>
         </div>
       </div>
-    </div>
+    
   );
 };
 

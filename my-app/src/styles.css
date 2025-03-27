@@ -31,8 +31,8 @@
 
 /* Upload Button */
 .upload-btn {
-  background-color: #F1DC8D;
-  color: #000000  ;
+  background-color: #F20668;
+  color: #ffffff  ;
   padding: 12px 24px;
   font-size: 1.2rem;
   border: none;
@@ -40,13 +40,13 @@
   cursor: pointer;
   transition: background-color 0.3s, opacity 0.3s;
   position: absolute;
-  top: 25%;
-  left: 8.5%;
+  top: 11%;
+  right: 7%;
 }
 
 .upload-btn:hover {
   background-color: #000000; /* Turns transparent */
-  color : #F1DC8D;
+  color : #F20668;
   border-style: solid;
   opacity: 0.8;
 }
@@ -64,8 +64,11 @@
   background: rgba(0, 0, 0, 0.6); /* Blurry background */
   padding: 20px;
   border-radius: 15px;
-  width: 90%;
+  width: 40%;
   text-align: left;
+  position: absolute;
+  bottom: 25%;
+  left: 5%;
 }
 
 .about-box h2 {
